@@ -1,5 +1,6 @@
 import express from "express";
 import tools from "./tools.js";
+import docs from "./docs.js";
 
 const router = express.Router();
 
@@ -9,6 +10,7 @@ router.get('/', (req, res) => {
 });
 
 // Registriere den Tools-Router unter der Basisroute "/docs"
-router.use("/docs", tools);
+router.use("/tools", tools);
+router.use("/docs", docs);
 
 export default router;
