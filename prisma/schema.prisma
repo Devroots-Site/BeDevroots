@@ -34,4 +34,12 @@ model docs {
   keywords    Json?
 }
 
+model websites {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  link        String    @unique
+  keywords    String[]
+}
+
 

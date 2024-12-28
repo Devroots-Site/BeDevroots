@@ -1,20 +1,22 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client'
 import dotenv from 'dotenv';
-import e from 'express';
+
 
 const router = express.Router();
 dotenv.config();
 const prisma = new PrismaClient()
 
-
 router.get('/', (req, res) => {
-    res.json({ message: 'Docs endpoint is working!' });
-});
+    res.json({ message: 'Websites endpoint is working!' });
+}
+
+);
+
 
 router.get("/all", async (req, res) => {
     prisma.$connect();
-    prisma.docs.findMany({
+    prisma.websites.findMany({
         orderBy: {
             name: 'asc'
         }
@@ -32,7 +34,7 @@ router.get("/all", async (req, res) => {
 
 router.get("/categories/all", async (req, res) => {
     try {
-        const data = await prisma.docs.findMany({
+        const data = await prisma.websites.findMany({
             select: {
                 keywords: true, // Select only the `keywords` field
             },
@@ -40,15 +42,15 @@ router.get("/categories/all", async (req, res) => {
 
         // Flatten and extract unique keywords
         const allKeywords = data
-            .flatMap((doc) => doc.keywords || []) // Flatten keywords and exclude null
+            .flatMap((website) => website.keywords || []) // Flatten keywords and exclude null
             .filter((keyword, index, self) => self.indexOf(keyword) === index); // Get unique keywords
 
         res.json({ keywords: allKeywords });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-});
-
+}
+);
 
 
 export default router;

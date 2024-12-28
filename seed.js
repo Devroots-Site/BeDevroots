@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
-import { toolsData } from './testData/tools.js'
-import { docsData } from './testData/docs.js'
+import { toolsData } from './prisma/testData/tools.js'
+import { docsData } from './prisma/testData/docs.js'
+import { websitesData } from './prisma/testData/websites.js'
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -19,12 +20,21 @@ async function main() {
             await prisma.tools.deleteMany()
         }
 
+        const findWebsites = await prisma.websites.findMany()
+        if (findWebsites.length > 0) {
+            await prisma.websites.deleteMany()
+        }
+
         await prisma.docs.createMany({
             data: docsData
         })
 
         await prisma.tools.createMany({
             data: toolsData
+        })
+
+        await prisma.websites.createMany({
+            data: websitesData
         })
 
         console.log('Daten erfolgreich aktualisiert.')
