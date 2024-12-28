@@ -7,39 +7,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Model for tools
 model tools {
-  id          Int       @id @default(autoincrement())
-  name        String    @unique
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
   language    String?
   keywords    Json?
   link        String[]
   author      String
-  updated_at  DateTime  @updatedAt
-  created_at  DateTime  @default(now())
+  updated_at  DateTime @updatedAt
+  created_at  DateTime @default(now())
   picturepath String?
 }
 
-// Model for docs
 model docs {
-  id          Int       @id @default(autoincrement())
-  name        String    @unique
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
   description String?
   version     String?
-  created_at  DateTime  @default(now())
-  updated_at  DateTime  @updatedAt
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
   creator     String?
-  filepath    String    @unique
+  filepath    String   @unique
   picturepath String?
   keywords    Json?
 }
 
 model websites {
-  id          Int       @id @default(autoincrement())
-  name        String    @unique
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
   description String?
-  link        String    @unique
+  link        String   @unique
   keywords    String[]
 }
-
-
