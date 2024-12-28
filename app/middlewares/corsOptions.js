@@ -1,8 +1,8 @@
 const corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200,
-    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: '*', // Erlaubt alle Ursprünge
+    optionsSuccessStatus: 200, // Für ältere Browser
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'], // Erlaubte Methoden
+    allowedHeaders: ['Content-Type', 'Authorization'], // Erlaubte Header
 };
 
 export { corsOptions };
