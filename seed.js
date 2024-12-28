@@ -6,7 +6,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const prisma = new PrismaClient()
-console.log('DATABASE_URL:', process.env.DATABASE_URL);
 
 async function main() {
     try {
@@ -37,7 +36,6 @@ async function main() {
             data: websitesData
         })
 
-        console.log('Daten erfolgreich aktualisiert.')
     } catch (e) {
         console.error('Fehler beim Aktualisieren der Daten:', e)
     } finally {
