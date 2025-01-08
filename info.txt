@@ -1,0 +1,11 @@
+Last erros
+
+Fix: 
+- remove all node_modules (rm -rf node_modules package-lock.json)
+- npm i 
+- npm install @prisma/client --save-dev
+- npm install prisma --save-dev
+- npm update prisma @prisma/client
+- npm run prisma:generate
+- npm run prisma:migrate
+- npm start
