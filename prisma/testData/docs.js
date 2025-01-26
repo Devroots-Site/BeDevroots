@@ -129,6 +129,17 @@ const docsData = [
         creator: "Bichler Bastian",
         filepath: "vue\/_build\/html\/index.html",
         picturepath: "",
+    },
+    {
+        name: "AI - Artificial Intelligence",
+        description: "Site für Prompting und AI - Artificial Intelligence",
+        keywords: "{ai}",
+        version: "1.0.0",
+        created_at: "2024-11-23T13:15:53.085Z",
+        updated_at: "2024-11-23T13:15:53.085Z",
+        creator: "Bichler Bastian",
+        filepath: "ai\/_build\/html\/index.html",
+        picturepath: "",
     }
 ]
 
