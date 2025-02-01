@@ -1,7 +1,6 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client'
 import dotenv from 'dotenv';
-import e from 'express';
 
 const router = express.Router();
 dotenv.config();
@@ -13,8 +12,8 @@ router.get('/', (req, res) => {
 });
 
 router.get("/all", async (req, res) => {
-    prisma.$connect();
-    prisma.docs.findMany({
+    await prisma.$connect();
+    await prisma.docs.findMany({
         orderBy: {
             name: 'asc'
         }
@@ -25,7 +24,7 @@ router.get("/all", async (req, res) => {
         .catch((error) => {
             res.json({ error: error });
         }).finally(() => {
-            prisma.$disconnect();
+             prisma.$disconnect();
         });
 }
 );
