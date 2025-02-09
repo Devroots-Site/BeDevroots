@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
 
 
 router.get("/all", async (req, res) => {
-    prisma.$connect();
-    prisma.tools.findMany()
+    await prisma.$connect();
+    await prisma.tools.findMany()
         .then((data) => {
             res.json(data);
         })

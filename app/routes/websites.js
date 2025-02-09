@@ -15,8 +15,8 @@ router.get('/', (req, res) => {
 
 
 router.get("/all", async (req, res) => {
-    prisma.$connect();
-    prisma.websites.findMany({
+    await prisma.$connect();
+    await prisma.websites.findMany({
         orderBy: {
             name: 'asc'
         }
