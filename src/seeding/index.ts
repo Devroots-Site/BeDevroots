@@ -6,30 +6,30 @@ import { seedTools } from './tools.seed';
 import { toolData } from './data/tools.data';
 
 async function runSeeding() {
-  console.log('🟡 Seeding gestartet...\n');
+  console.log('🟡 starting seeding ...\n');
   await timeoutSeeding();
-  console.log('📄 Dokumentation wird eingefügt...');
+  console.log('📄 creating documentation ...');
   await seedDocumenation(docsData as []);
   await timeoutSeeding();
-  console.log(`✅ Dokumentation fertig (${docsData.length} Einträge)`);
+  console.log(`✅ Documentation completed (${docsData.length} entries)`);
   await timeoutSeeding();
-  console.log('🌐 Websites werden eingefügt...');
+  console.log('🌐 Inserting websites...');
   await timeoutSeeding();
   await seedWebsite(websitesData as []);
   await timeoutSeeding();
-  console.log(`✅ Websites fertig (${websitesData.length} Einträge)`);
+  console.log(`✅ Websites completed (${websitesData.length} entries)`);
   await timeoutSeeding();
 
-  console.log('🛠️ Tools werden eingefügt...');
+  console.log('🛠️ Inserting tools...');
   await seedTools(toolData as []);
   await timeoutSeeding();
-  console.log(`✅ Tools fertig (${toolData.length} Einträge)`);
+  console.log(`✅ Tools completed (${toolData.length} entries)`);
   await timeoutSeeding();
-  console.log('\n🎉 Seeding abgeschlossen!');
+  console.log('\n🎉 Seeding completed!');
 }
 
 runSeeding().catch((e) => {
-  console.error('❌ Fehler beim Seeding:', e);
+  console.error('❌ Error during seeding:', e);
   process.exit(1);
 });
 

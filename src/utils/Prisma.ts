@@ -8,7 +8,7 @@ const globalForPrisma = globalThis as unknown as {
 export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
-    log: ['query', 'error'], // optional: für Debug-Zwecke
+    log: ['query', 'error'], // optional for debugging
   });
 
 export const seedPrima = new PrismaClient({

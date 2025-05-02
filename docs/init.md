@@ -14,8 +14,8 @@ This backend project serves as the foundation for the **start page of devroots.d
 
 ## Contact
 
-This project is maintained by **Bichel Bastian**.
+This project is maintained by **Bichler Bastian**.
 
 For questions, feel free to reach out via email:
 
-📧 [bichelrbastian@gmail.com](mailto:bichelrbastian@gmail.com)
+📧 [bichlerbastian@gmail.com](mailto:bichlerbastian@gmail.com)

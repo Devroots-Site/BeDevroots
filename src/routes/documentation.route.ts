@@ -9,7 +9,7 @@ const routes: IRoute[] = [
     routeName: `${path}/all`,
     method: 'get',
     controller: DocumentationController.getAllDocs,
-    comments: 'Alle Dokumente abrufen',
+    comments: 'Get all documentation',
   },
 ];
 

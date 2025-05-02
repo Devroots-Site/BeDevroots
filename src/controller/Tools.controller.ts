@@ -14,7 +14,7 @@ export class ToolControler {
       if (error instanceof CustomError) {
         return res.status(error.statusCode).json({ code: error.code, error: error.message });
       }
-      return res.status(500).json({ error: 'Fehler beim Abrufen der Tools' });
+      return res.status(500).json({ error: 'found all Tools' });
     }
   }
 
@@ -33,7 +33,7 @@ export class ToolControler {
       if (error instanceof CustomError) {
         return res.status(error.statusCode).json({ code: error.code, error: error.message });
       }
-      return res.status(500).json({ error: 'Error on getToolsById' });
+      return res.status(500).json({ error: 'Error on find tool by Id' });
     }
   }
 }
