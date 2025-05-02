@@ -5,6 +5,8 @@ import { corsOptions } from '../middlewares';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
+import swaggerUi from 'swagger-ui-express';
+import * as swaggerDocument from '../swagger.json';
 
 dotenv.config();
 
@@ -33,6 +35,8 @@ export class App {
     this.app.get('/', (_req, res) => {
       res.send('API for devroots is online ✅');
     });
+
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
     const routesDir = path.join(__dirname, '..', 'routes');
     const files = fs.readdirSync(routesDir);
