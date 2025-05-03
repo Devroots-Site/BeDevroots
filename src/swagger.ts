@@ -1,16 +1,36 @@
-import swaggerAutogen from 'swagger-autogen';
+import { OpenAPIV3 } from 'openapi-types';
 
-const doc = {
+export const swaggerSpec: OpenAPIV3.Document = {
+  openapi: '3.0.0',
   info: {
-    title: 'Meine API',
-    description: 'API-Dokumentation mit Swagger und TypeScript',
+    title: 'BeDevroots API',
     version: '1.0.0',
+    description: 'Manuell definierte Swagger-Dokumentation für Testzwecke',
   },
-  host: 'localhost:3000',
-  schemes: ['http'],
+  paths: {
+    '/hello': {
+      get: {
+        summary: 'Hello World Testroute',
+        tags: ['Test'],
+        responses: {
+          '200': {
+            description: 'Erfolgreiche Antwort',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Hello, world!',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 };
-
-const outputFile = './swagger-output.json';
-const endpointsFiles = ['./src/routes/user.routes.ts'];
-
-swaggerAutogen()(outputFile, endpointsFiles, doc);
