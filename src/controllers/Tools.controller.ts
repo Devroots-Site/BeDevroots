@@ -15,7 +15,7 @@ export class ToolControler {
       if (error instanceof CustomError) {
         res.status(error.statusCode).json({ code: error.code, error: error.message });
       }
-      res.status(500).json({ error: 'found all Tools' });
+      res.status(500).json({ error: 'error on found all Tools' });
     }
   }
 
