@@ -1,23 +1,17 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "BeDevroots API",
+    "title": "Express Swagger UI API",
     "version": "1.0.0",
-    "description": "Dokumentation der REST API"
+    "description": "API documentation for Express with Swagger UI"
   },
-  "servers": [
-    {
-      "url": "http://localhost:3000",
-      "description": "Local Swagger Server"
-    }
-  ],
   "paths": {
     "/": {
       "get": {
-        "summary": "Healthcheck",
+        "summary": "Get Hello World",
         "responses": {
           "200": {
-            "description": "API erreichbar"
+            "description": "Successful response"
           }
         }
       }
