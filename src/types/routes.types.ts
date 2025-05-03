@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 
-export type ControllerHandler = (req: Request, res: Response, next: NextFunction) => Promise<void>;
+export type ControllerHandler = (
+  _req: Request,
+  _res: Response,
+  _next: NextFunction,
+) => Promise<void>;
 
 export interface IRoute {
   routeName: string;

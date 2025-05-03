@@ -30,6 +30,8 @@ model documentation {
   filepath    String   @unique
   picturepath String?
   keywords    Json?
+  is_active  Boolean  @default(true)
+  is_public  Boolean  @default(true)
 }
 
 model websites {

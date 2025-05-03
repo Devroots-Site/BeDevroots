@@ -1,7 +1,5 @@
-import { Request, Response, NextFunction } from 'express';
-import { DocumentationController } from '../controller/Documentation.controller';
 import { IRoute } from '../types/routes.types';
-import { ToolControler } from '../controller/Tools.controller';
+import { ToolControler } from '../controllers/Tools.controller';
 
 const path = '/tools';
 

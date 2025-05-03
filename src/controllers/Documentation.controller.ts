@@ -1,5 +1,4 @@
-import { prisma } from '../utils/Prisma';
-import { DocumentationService } from '../service/Documentation.service';
+import { DocumentationService } from '../services/Documentation.service';
 import { CustomError } from '../models/CustomError';
 import { ErrorCode } from '../types/CustomError.types';
 import { Request, Response, NextFunction } from 'express';
