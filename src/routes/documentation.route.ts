@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { DocumentationController } from '../controller/Documentation.controller';
+import { DocumentationController } from '../controllers/Documentation.controller';
 import { IRoute } from '../types/routes.types';
 
 const path = '/documentation';

@@ -1,5 +1,5 @@
 import { CustomError } from '../models/CustomError';
-import { WebsiteService } from '../service/Website.service';
+import { WebsiteService } from '../services/Website.service';
 import { ErrorCode } from '../types/CustomError.types';
 
 export class WebsiteController {

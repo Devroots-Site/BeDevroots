@@ -1,5 +1,5 @@
 import { CustomError } from '../models/CustomError';
-import { ToolService } from '../service/Tools.service';
+import { ToolService } from '../services/Tools.service';
 import { ErrorCode } from '../types/CustomError.types';
 
 export class ToolControler {
