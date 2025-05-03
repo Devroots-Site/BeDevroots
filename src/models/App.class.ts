@@ -78,15 +78,16 @@ export class App {
     this.app.listen(port, () => {
       console.log(`
   ========================================================
-  🚀 API Server gestartet
+  🚀 API Server started
   --------------------------------------------------------
   🌐 URL:              http://localhost:${port}
-  🧭 Umgebung:         ${env}
-  🕒 Startzeit:        ${startTime}
-  📁 Basisroute:       /
+  🧭 Enviroment:       ${env}
+  🕒 Starttime:        ${startTime}
+  📁 BasicRoute:       /
   --------------------------------------------------------
   📦 Version:          ${process.env.npm_package_version ?? 'unbekannt'}
-  📘 Routen geladen:   ${port}
+  📘 Port:             ${port}
+  📃 Documentation     http://localhost:${port}/api-docs
   ========================================================
       `);
     });
