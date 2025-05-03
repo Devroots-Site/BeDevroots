@@ -1,5 +1,5 @@
 const corsOptions = {
-  origin: '*', 
+  origin: '*',
   optionsSuccessStatus: 200,
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],

@@ -12,8 +12,7 @@ export const prisma =
   });
 
 export const seedPrima = new PrismaClient({
-  log: []
-})
-
+  log: [],
+});
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;

@@ -1,4 +1,3 @@
-import { prisma } from '../utils/Prisma';
 import { DocumentationService } from '../services/Documentation.service';
 import { CustomError } from '../models/CustomError';
 import { ErrorCode } from '../types/CustomError.types';

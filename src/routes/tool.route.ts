@@ -1,5 +1,3 @@
-import { Request, Response, NextFunction } from 'express';
-import { DocumentationController } from '../controllers/Documentation.controller';
 import { IRoute } from '../types/routes.types';
 import { ToolControler } from '../controllers/Tools.controller';
 

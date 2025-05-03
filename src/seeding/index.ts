@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { seedDocumenation } from './documentation.seed';
 import { seedWebsite } from './website.seed';
 import { docsData } from './data/documentation.data';

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars, @typescript-eslint/no-unused-vars */
 export enum ErrorCode {
   USER_NOT_FOUND = 'USER_NOT_FOUND',
   INVALID_INPUT = 'INVALID_INPUT',
