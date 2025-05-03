@@ -56,7 +56,8 @@ export class App {
           const handler = (this.app as any)[method];
 
           if (typeof handler === 'function') {
-            handler.call(this.app, route.routeName, route.controller);
+            const middleware = route.middlewares ?? [];
+            handler.call(this.app, route.routeName, ...middleware, route.controller);
             console.log(`🔗 [${method.toUpperCase()}] ${route.routeName} ✔`);
           } else {
             console.warn(`❌ Unsupported HTTP method: ${route.method}`);
