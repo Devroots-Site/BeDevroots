@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, RequestHandler, Response } from 'express';
 
 export type ControllerHandler = (
   _req: Request,
@@ -10,5 +10,6 @@ export interface IRoute {
   routeName: string;
   method: 'get' | 'post' | 'put' | 'delete' | 'patch';
   controller: ControllerHandler;
+  middlewares?: RequestHandler[];
   comments?: string;
 }

@@ -30,8 +30,8 @@ model documentation {
   filepath    String   @unique
   picturepath String?
   keywords    Json?
-  is_active  Boolean  @default(true)
-  is_public  Boolean  @default(true)
+  is_active   Boolean  @default(true)
+  is_public   Boolean  @default(true)
 }
 
 model websites {
@@ -40,4 +40,15 @@ model websites {
   description String?
   link        String   @unique
   keywords    String[]
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  username   String   @unique
+  email      String   @unique
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_active  Boolean  @default(true)
+  is_admin   Boolean  @default(false)
 }
