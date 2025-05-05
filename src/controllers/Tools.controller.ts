@@ -1,3 +1,4 @@
+import { ApiResponseBuilder } from '../models/ApiResponseBuilder';
 import { CustomError } from '../models/CustomError';
 import { ToolService } from '../services/Tools.service';
 import { ErrorCode } from '../types/CustomError.types';
@@ -7,18 +8,24 @@ export class ToolControler {
   public static async getAllTools(req: Request, res: Response) {
     try {
       const tools = await ToolService.getAllTools();
+
       if (!tools || tools.length === 0) {
-        throw new CustomError('No tools found', ErrorCode.TOOLS_NOT_FOUND);
+        throw new CustomError('No tools found', ErrorCode.TOOLS_NOT_FOUND, 404);
       }
-      res.status(200).json(tools);
+
+      res.status(200).json(ApiResponseBuilder.success('Tools retrieved successfully', tools));
     } catch (error) {
       if (error instanceof CustomError) {
-        res.status(error.statusCode).json({ code: error.code, error: error.message });
+        res.status(error.statusCode).json(ApiResponseBuilder.error(error.message, error.code));
+      } else {
+        res
+          .status(500)
+          .json(
+            ApiResponseBuilder.error('Unexpected server error', ErrorCode.INTERNAL_SERVER_ERROR),
+          );
       }
-      res.status(500).json({ error: 'error on found all Tools' });
     }
   }
-
   public static async getToolById(req: Request, res: Response) {
     const { id } = req.params;
     try {
@@ -29,12 +36,14 @@ export class ToolControler {
       if (!tool) {
         throw new CustomError('Tool not found', ErrorCode.TOOLS_NOT_FOUND, 200);
       }
-      res.status(200).json(tool);
+      res.status(200).json(ApiResponseBuilder.success(`Tool find with id: ${id}`, tool));
     } catch (error) {
       if (error instanceof CustomError) {
-        res.status(error.statusCode).json({ code: error.code, error: error.message });
+        res.status(error.statusCode).json(ApiResponseBuilder.error(error.message, error.code));
       }
-      res.status(500).json({ error: 'Error on find tool by Id' });
+      res
+        .status(500)
+        .json(ApiResponseBuilder.error('Unexpected server error', ErrorCode.INTERNAL_SERVER_ERROR));
     }
   }
 }

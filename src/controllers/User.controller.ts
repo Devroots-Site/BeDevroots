@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import { UserService } from '../services/User.service';
+import jwt from 'jsonwebtoken';
 
 export class UserController {
   public static async login(req: Request, res: Response): Promise<void> {
     try {
       const { email, username, password } = req.body;
-
       const identifier = email || username;
 
       if (!identifier || !password) {
@@ -20,7 +20,32 @@ export class UserController {
         return;
       }
 
-      res.status(200).json({ message: 'Login successful', user });
+      if (!process.env.JWT_SECRET) {
+        console.error('JWT_SECRET is missing in environment');
+        res.status(500).json({ message: 'JWT configuration error' });
+        return;
+      }
+
+      // 🔐 Token im Controller erzeugen
+      const token = jwt.sign(
+        {
+          id: user.id,
+          email: user.email,
+          username: user.username,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' },
+      );
+
+      res.status(200).json({
+        message: 'Login successful',
+        token,
+        user: {
+          id: user.id,
+          email: user.email,
+          username: user.username,
+        },
+      });
     } catch (error) {
       console.error('Login error:', error);
       res.status(500).json({ message: 'Internal server error' });

@@ -6,15 +6,19 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import swaggerUi from 'swagger-ui-express';
-import * as swaggerDocument from '../swagger.json';
+
+import CustomSwagger from './CustomSwagger';
+import { errorHandler } from '../middlewares/errorHandler';
 
 dotenv.config();
 
 export class App {
   public app: Application;
+  private swagger: CustomSwagger;
 
   constructor() {
     this.app = express();
+    this.swagger = new CustomSwagger('BeDevroots API', '1.0.0', 'Automatisch generierte API-Doku');
     this.setupMiddleware();
     this.setupRoutes();
   }
@@ -22,6 +26,7 @@ export class App {
   private setupMiddleware(): void {
     this.app.use(express.json());
     this.app.use(cors(corsOptions));
+
     if (process.env.NODE_ENV === 'development') {
       this.app.use(morgan('dev'));
     }
@@ -36,35 +41,27 @@ export class App {
       res.send('API for devroots is online ✅');
     });
 
-    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
     const routesDir = path.join(__dirname, '..', 'routes');
     const files = fs.readdirSync(routesDir);
 
     for (const file of files) {
       if (file.endsWith('.route.ts') || file.endsWith('.route.js')) {
         const filePath = path.join(routesDir, file);
-
-        // Dynamisches Importieren
         const routeModule = await import(filePath);
 
-        const routes = routeModule.routes;
-        if (!Array.isArray(routes)) continue;
+        const routeObject = routeModule.routes;
 
-        for (const route of routes) {
-          const method = route.method.toLowerCase();
-          const handler = (this.app as any)[method];
+        if (!routeObject?.router || !routeObject?.getSwaggerDocs) continue;
 
-          if (typeof handler === 'function') {
-            const middleware = route.middlewares ?? [];
-            handler.call(this.app, route.routeName, ...middleware, route.controller);
-            console.log(`🔗 [${method.toUpperCase()}] ${route.routeName} ✔`);
-          } else {
-            console.warn(`❌ Unsupported HTTP method: ${route.method}`);
-          }
-        }
+        this.app.use(routeObject.basePath, routeObject.router);
+        this.swagger.addRoutes(routeObject.getSwaggerDocs());
+
+        console.log(`🔗 [ROUTE] ${routeObject.basePath} ✔`);
       }
     }
+
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(this.swagger.build()));
+    this.app.use(errorHandler);
   }
 
   public getInstance(): Application {
@@ -78,18 +75,18 @@ export class App {
 
     this.app.listen(port, () => {
       console.log(`
-  ========================================================
-  🚀 API Server started
-  --------------------------------------------------------
-  🌐 URL:              http://localhost:${port}
-  🧭 Enviroment:       ${env}
-  🕒 Starttime:        ${startTime}
-  📁 BasicRoute:       /
-  --------------------------------------------------------
-  📦 Version:          ${process.env.npm_package_version ?? 'unbekannt'}
-  📘 Port:             ${port}
-  📃 Documentation     http://localhost:${port}/api-docs
-  ========================================================
+========================================================
+🚀 API Server started
+--------------------------------------------------------
+🌐 URL:              http://localhost:${port}
+🧭 Enviroment:       ${env}
+🕒 Starttime:        ${startTime}
+📁 BasicRoute:       /
+--------------------------------------------------------
+📦 Version:          ${process.env.npm_package_version ?? 'unbekannt'}
+📘 Port:             ${port}
+📃 Documentation     http://localhost:${port}/api-docs
+========================================================
       `);
     });
   }
