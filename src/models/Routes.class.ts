@@ -1,5 +1,5 @@
 import { Router, RequestHandler } from 'express';
-import { SwaggerRouteEntry } from './CustomSwagger'; // Stelle sicher, dass dieses Interface exportiert ist
+import { SwaggerRouteEntry } from './CustomSwagger';
 
 export type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
 
