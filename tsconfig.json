@@ -2,12 +2,17 @@
   "compilerOptions": {
       "types": [ "node"],
       "outDir": "./dist",
-      "rootDir": "./src",
+      "rootDir": ".",
       "module": "CommonJS",
       "target": "ESNext",
       "strict": true,
       "esModuleInterop": true,
       "skipLibCheck": true,
       "resolveJsonModule": true,
+      "baseUrl": "./src",
+      "paths": {
+          "@/*": ["./*"],
+          "src/*": ["./*"],
+      }
   }
 }

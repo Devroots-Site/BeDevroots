@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { ToolService } from './Tools.service';
-import { prisma } from '../utils/Prisma';
+import { ToolService } from '@/services/Tools.service';
+import { prisma } from '../../utils/Prisma';
 
-vi.mock('../utils/Prisma', () => ({
+vi.mock('@/utils/Prisma', () => ({
     prisma: {
         tools: {
             findMany: vi.fn(),
@@ -10,7 +10,6 @@ vi.mock('../utils/Prisma', () => ({
         },
     },
 }));
-
 describe('ToolService', () => {
     beforeEach(() => {
         vi.clearAllMocks();

@@ -9,7 +9,7 @@ import swaggerUi from 'swagger-ui-express';
 import cookieParser from 'cookie-parser';
 
 import CustomSwagger from './CustomSwagger';
-import { errorHandler } from '../middlewares/errorHandler';
+import { errorHandler } from '../middlewares/error.middleware';
 
 dotenv.config();
 
@@ -51,6 +51,7 @@ export class App {
         const files = fs.readdirSync(routesDir);
 
         for (const file of files) {
+            console.log('File', file);
             if (file.endsWith('.route.ts') || file.endsWith('.route.js')) {
                 const filePath = path.join(routesDir, file);
                 const routeModule = await import(filePath);
