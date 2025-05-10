@@ -1,20 +1,20 @@
 {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Express Swagger UI API",
-    "version": "1.0.0",
-    "description": "API documentation for Express with Swagger UI"
-  },
-  "paths": {
-    "/": {
-      "get": {
-        "summary": "Get Hello World",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Express Swagger UI API",
+        "version": "1.0.0",
+        "description": "API documentation for Express with Swagger UI"
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "Get Hello World",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
