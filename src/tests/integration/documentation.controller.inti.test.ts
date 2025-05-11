@@ -115,4 +115,50 @@ describe('DocumentationController Integration', () => {
             });
         });
     });
+
+    describe('GET /documentation/keywords/all', () => {
+        it('should return 200 with keywords', async () => {
+            const mockKeywords = ['keyword1', 'keyword2'];
+
+            (DocumentationService.getAllKeywordsFromDocumentation as any).mockResolvedValue(
+                mockKeywords,
+            );
+
+            const res = await request(app).get('/documentation/keywords/all');
+
+            expect(res.status).toBe(200);
+            expect(res.body).toEqual({
+                status: 'success',
+                message: 'Documents retrieved successfully',
+                payload: mockKeywords,
+            });
+        });
+
+        it('should return 500 on error', async () => {
+            (DocumentationService.getAllKeywordsFromDocumentation as any).mockRejectedValue(
+                new Error('DB error'),
+            );
+
+            const res = await request(app).get('/documentation/keywords/all');
+
+            expect(res.status).toBe(500);
+            expect(res.body).toMatchObject({
+                status: 'error',
+                message: expect.stringContaining('unexpected error'),
+                code: 'INTERNAL_SERVER_ERROR',
+            });
+        });
+        it('should return 200 with empty array if no keywords found', async () => {
+            (DocumentationService.getAllKeywordsFromDocumentation as any).mockResolvedValue([]);
+
+            const res = await request(app).get('/documentation/keywords/all');
+
+            expect(res.status).toBe(200);
+            expect(res.body).toEqual({
+                status: 'success',
+                message: 'Documents retrieved successfully',
+                payload: [],
+            });
+        });
+    });
 });

@@ -14,5 +14,7 @@ app.get('/websites/public/all', WebsiteController.getPublicAndActiveWebsites);
 
 app.get('/documentation/all', DocumentationController.getAllDocs);
 app.get('/documentation/public/all', DocumentationController.getAllActiveAndPublicDocs);
+app.get('/websites/keywords/all', WebsiteController.getAllKeywords);
+app.get('/documentation/keywords/all', DocumentationController.getAllKeywordsFromDocs);
 app.use(errorHandler);
 export default app;

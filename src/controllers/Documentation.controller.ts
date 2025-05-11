@@ -42,4 +42,20 @@ export class DocumentationController {
             }
         }
     }
+
+    public static async getAllKeywordsFromDocs(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const data = await DocumentationService.getAllKeywordsFromDocumentation();
+
+            res.status(200).json(
+                ApiResponseBuilder.success('Documents retrieved successfully', data),
+            );
+        } catch (error) {
+            next(error);
+        }
+    }
 }

@@ -29,7 +29,7 @@ model documentation {
   creator     String?
   filepath    String   @unique
   picturepath String?
-  keywords    Json?
+  keywords    String[]
   is_active   Boolean  @default(true)
   is_public   Boolean  @default(true)
 }
@@ -40,8 +40,8 @@ model websites {
   description String?
   link        String   @unique
   keywords    String[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   is_active   Boolean  @default(true)
   is_public   Boolean  @default(true)
 }

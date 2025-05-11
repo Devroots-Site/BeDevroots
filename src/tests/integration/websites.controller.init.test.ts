@@ -132,4 +132,36 @@ describe('WebsiteController Integration', () => {
             });
         });
     });
+
+    describe('GET /websites/keywords', () => {
+        it('should return all keywords', async () => {
+            const mockKeywords = ['keyword1', 'keyword2'];
+
+            vi.spyOn(WebsiteService, 'findAllKeywords').mockResolvedValue(mockKeywords);
+
+            const response = await request(app).get('/websites/keywords/all');
+
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual({
+                status: 'success',
+                message: 'Keywords fetched successfully',
+                payload: mockKeywords,
+            });
+        });
+
+        it('should return 500 if an error occurs', async () => {
+            vi.spyOn(WebsiteService, 'findAllKeywords').mockRejectedValue(
+                new Error('Database error'),
+            );
+
+            const response = await request(app).get('/websites/keywords/all');
+
+            expect(response.status).toBe(500);
+            expect(response.body).toEqual({
+                status: 'error',
+                message: 'An unexpected error occurred. On Route /websites/keywords/all',
+                code: 'INTERNAL_SERVER_ERROR',
+            });
+        });
+    });
 });
