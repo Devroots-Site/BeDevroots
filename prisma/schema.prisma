@@ -31,7 +31,7 @@ model documentation {
   creator     String?
   filepath    String   @unique
   picturepath String?
-  keywords    Json?
+  keywords    String[]
   is_active   Boolean  @default(true)
   is_public   Boolean  @default(true)
 }

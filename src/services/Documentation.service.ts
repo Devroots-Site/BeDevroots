@@ -32,4 +32,16 @@ export class DocumentationService {
         });
         return data;
     }
+
+    public static async getAllKeywordsFromDocumentation(): Promise<string[]> {
+        const data = await prisma.documentation.findMany({
+            select: {
+                keywords: true,
+            },
+        });
+        const keywords = data.map((doc) => doc.keywords).flat();
+        const uniqueKeywords = [...new Set(keywords)];
+
+        return uniqueKeywords;
+    }
 }

@@ -30,7 +30,7 @@ export class WebsiteController {
         }
     }
 
-    public static async getWebsiteById(req: Request, res: Response) {
+    public static async getWebsiteById(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
         try {
             const website = await WebsiteService.findWebsiteById(Number(id));
@@ -39,10 +39,18 @@ export class WebsiteController {
             }
             res.status(200).json(website);
         } catch (error) {
-            if (error instanceof CustomError) {
-                res.status(error.statusCode).json({ code: error.code, error: error.message });
-            }
-            res.status(500).json({ message: 'Error fetching website', error });
+            next(error);
+        }
+    }
+
+    public static async getAllKeywords(req: Request, res: Response, next: NextFunction) {
+        try {
+            const keywords = await WebsiteService.findAllKeywords();
+            res.status(200).json(
+                ApiResponseBuilder.success('Keywords fetched successfully', keywords),
+            );
+        } catch (error) {
+            next(error);
         }
     }
 }

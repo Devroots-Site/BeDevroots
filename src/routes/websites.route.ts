@@ -188,6 +188,65 @@ const routes = new Routes(path, [
             },
         },
     },
+    {
+        path: '/keywords/all',
+        method: 'get',
+        handler: WebsiteController.getAllKeywords,
+        comment: 'Find all keywords',
+        swagger: {
+            summary: 'Get all keywords',
+            description: 'Returns a list of all keywords',
+            tags: ['Websites'],
+            responses: {
+                200: {
+                    description: 'Keywords fetched successfully',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    status: { type: 'string', example: 'success' },
+                                    message: {
+                                        type: 'string',
+                                        example: 'Keywords fetched successfully',
+                                    },
+                                    payload: {
+                                        type: 'array',
+                                        items: { type: 'string' },
+                                        example: [
+                                            'seo',
+                                            'marketing',
+                                            'development',
+                                            'example keyword',
+                                        ],
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                500: {
+                    description: 'Internal server error',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    status: { type: 'string', example: 'error' },
+                                    message: {
+                                        type: 'string',
+                                        example:
+                                            'An unexpected error occurred. On Route /websites/keywords/all',
+                                    },
+                                    code: { type: 'string', example: 'INTERNAL_SERVER_ERROR' },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
 ]);
 
 export { routes };

@@ -32,4 +32,14 @@ export class WebsiteService {
             },
         });
     }
+
+    public static async findAllKeywords(): Promise<string[]> {
+        const keywords = await prisma.websites.findMany({
+            select: {
+                keywords: true,
+            },
+        });
+
+        return keywords.map((website) => website.keywords).flat();
+    }
 }

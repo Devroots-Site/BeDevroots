@@ -19,5 +19,7 @@ app.get('/documentation/public/all', DocumentationController.getAllActiveAndPubl
 app.get('/tools/all', ToolControler.getAllTools);
 app.get('/tools/public/all', ToolControler.getAllActiveAndPublicTools);
 
+app.get('/websites/keywords/all', WebsiteController.getAllKeywords);
+app.get('/documentation/keywords/all', DocumentationController.getAllKeywordsFromDocs);
 app.use(errorHandler);
 export default app;
