@@ -2,10 +2,10 @@ import { ApiResponseBuilder } from '../models/ApiResponseBuilder';
 import { CustomError } from '../models/CustomError';
 import { ToolService } from '../services/Tools.service';
 import { ErrorCode } from '../types/CustomError.types';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 export class ToolControler {
-    public static async getAllTools(req: Request, res: Response) {
+    public static async getAllTools(req: Request, res: Response, next: NextFunction) {
         try {
             const tools = await ToolService.getAllTools();
 
@@ -15,18 +15,7 @@ export class ToolControler {
 
             res.status(200).json(ApiResponseBuilder.success('Tools retrieved successfully', tools));
         } catch (error) {
-            if (error instanceof CustomError) {
-                res.status(error.statusCode).json(
-                    ApiResponseBuilder.error(error.message, error.code),
-                );
-            } else {
-                res.status(500).json(
-                    ApiResponseBuilder.error(
-                        'Unexpected server error',
-                        ErrorCode.INTERNAL_SERVER_ERROR,
-                    ),
-                );
-            }
+            next(error);
         }
     }
     public static async getToolById(req: Request, res: Response) {
@@ -52,6 +41,30 @@ export class ToolControler {
                     ErrorCode.INTERNAL_SERVER_ERROR,
                 ),
             );
+        }
+    }
+
+    public static async getAllActiveAndPublicTools(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const tools = await ToolService.getAllActiveAndPublicTools();
+
+            if (!tools || tools.length === 0) {
+                throw new CustomError(
+                    'No active and public tools found',
+                    ErrorCode.TOOLS_NOT_FOUND,
+                    200,
+                );
+            }
+
+            res.status(200).json(
+                ApiResponseBuilder.success('Active and public tools retrieved successfully', tools),
+            );
+        } catch (error) {
+            next(error);
         }
     }
 }
