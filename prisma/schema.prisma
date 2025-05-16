@@ -10,13 +10,15 @@ datasource db {
 model tools {
   id          Int      @id @default(autoincrement())
   name        String   @unique
-  language    String?
-  keywords    Json?
+  language    String
+  keywords    String[]
   link        String[]
   author      String
   updated_at  DateTime @updatedAt
   created_at  DateTime @default(now())
   picturepath String?
+  is_active   Boolean  @default(true)
+  is_public   Boolean  @default(true)
 }
 
 model documentation {
@@ -40,8 +42,8 @@ model websites {
   description String?
   link        String   @unique
   keywords    String[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   is_active   Boolean  @default(true)
   is_public   Boolean  @default(true)
 }

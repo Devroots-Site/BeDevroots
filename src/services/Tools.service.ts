@@ -13,4 +13,30 @@ export class ToolService {
         });
         return tool;
     }
+
+    public static async getAllActiveAndPublicTools(): Promise<
+        Array<Omit<tools, 'is_active' | 'is_public'>>
+    > {
+        const tools = await prisma.tools.findMany({
+            select: {
+                id: true,
+                name: true,
+                language: true,
+                keywords: true,
+                link: true,
+                author: true,
+                updated_at: true,
+                created_at: true,
+                picturepath: true,
+            },
+            where: {
+                is_active: true,
+                is_public: true,
+            },
+            orderBy: {
+                name: 'asc',
+            },
+        });
+        return tools;
+    }
 }

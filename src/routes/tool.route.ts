@@ -189,6 +189,85 @@ const routes = new Routes(path, [
             },
         },
     },
+    {
+        path: '/public/all',
+        method: 'get',
+        handler: ToolControler.getAllActiveAndPublicTools,
+        comment: 'find all active and public tools',
+        swagger: {
+            summary: 'find all active and public tools',
+            description:
+                'Returns a standardized API response containing an array of active and public tools. If no tools are found in the database, the payload is an empty array.',
+            tags: ['Tools'],
+            responses: {
+                200: {
+                    description: 'All active and public tools found',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    status: {
+                                        type: 'string',
+                                        example: 'success',
+                                    },
+                                    message: {
+                                        type: 'string',
+                                        example: 'Active and public tools retrieved successfully',
+                                    },
+                                    payload: {
+                                        type: 'array',
+                                        items: {
+                                            type: 'object',
+                                            properties: {
+                                                id: { type: 'integer', example: 1 },
+                                                name: { type: 'string', example: 'PDF CLI Tool' },
+                                                language: { type: 'string', example: 'Python' },
+                                                keywords: {
+                                                    type: 'array',
+                                                    items: { type: 'string', example: 'cli' },
+                                                    example: ['pdf', 'cli', 'python'],
+                                                },
+                                                link: {
+                                                    type: 'array',
+                                                    items: {
+                                                        type: 'string',
+                                                        example: 'https://github.com/...',
+                                                    },
+                                                    example: [
+                                                        'https://github.com/Personal-DevTools/cli-pdf',
+                                                    ],
+                                                },
+                                                author: {
+                                                    type: 'string',
+                                                    example: 'Bichler Bastian',
+                                                },
+                                                updated_at: {
+                                                    type: 'string',
+                                                    format: 'date-time',
+                                                    example: '2025-05-16T17:32:46.480Z',
+                                                },
+                                                created_at: {
+                                                    type: 'string',
+                                                    format: 'date-time',
+                                                    example: '2025-05-16T17:32:46.480Z',
+                                                },
+                                                picturepath: {
+                                                    type: 'string',
+                                                    example: 'null',
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                500: unknownServerErrorResponse,
+            },
+        },
+    },
 ]);
 
 export { routes };
