@@ -40,7 +40,9 @@ export class DocumentationService {
             },
         });
         const keywords = data.map((doc) => doc.keywords).flat();
-        const uniqueKeywords = [...new Set(keywords)];
+        const uniqueKeywords = [...new Set(keywords)].filter(
+            (kw): kw is string => typeof kw === 'string',
+        );
 
         return uniqueKeywords;
     }
