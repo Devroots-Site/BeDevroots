@@ -18,7 +18,7 @@
         "test:coverage:report": "vitest run --coverage --reporter=html",
         "test:coverage:check": "vitest run --coverage --reporter=html && vitest-coverage-checker --threshold 80",
         "test:coverage:check:html": "vitest run --coverage --reporter=html && vitest-coverage-checker --threshold 80 --reporter=html",
-        "start": "npx prisma db push && node dist/server.js",
+        "start": "npx prisma db push && node dist/src/index.js",
         "dev": "npm run infisical:generate && nodemon",
         "infisical:generate": "echo 'Generating .env from Infisical...' infisical pull --env=dev --path=.env --force",
         "prisma:generate": "npm run infisical:generate && npx prisma generate",
