@@ -132,6 +132,52 @@ const routes = new Routes(path, [
             },
         },
     },
+    {
+        path: '/keywords/all',
+        method: 'get',
+        handler: DocumentationController.getAllKeywordsFromDocs,
+        comment: 'Get all keywords from documentation',
+        swagger: {
+            tags: ['Documentation'],
+            summary: 'Get all keywords from documentation',
+            description: 'Get all keywords from documentation',
+            responses: {
+                200: {
+                    description: 'Documents retrieved successfully',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    status: { type: 'string' },
+                                    message: { type: 'string' },
+                                    payload: {
+                                        type: 'array',
+                                        items: { type: 'string' },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                500: {
+                    description: 'Internal server error',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    status: { type: 'string' },
+                                    message: { type: 'string' },
+                                    code: { type: 'string' },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
 ]);
 
 export { routes };

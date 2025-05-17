@@ -111,4 +111,24 @@ describe('WebsiteService', () => {
             expect(prisma.websites.findMany).toHaveBeenCalled();
         });
     });
+
+    describe('findAllKeywords', () => {
+        it('should return all keywords', async () => {
+            const mockWebsites = [
+                { id: 1, keywords: ['keyword1', 'keyword2'] },
+                { id: 2, keywords: ['keyword3'] },
+            ];
+            (prisma.websites.findMany as any).mockResolvedValue(mockWebsites);
+
+            const result = await WebsiteService.findAllKeywords();
+
+            expect(prisma.websites.findMany).toHaveBeenCalledWith({
+                select: {
+                    keywords: true,
+                },
+            });
+
+            expect(result).toEqual(['keyword1', 'keyword2', 'keyword3']);
+        });
+    });
 });
