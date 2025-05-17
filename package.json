@@ -6,6 +6,9 @@
     "_moduleAliases": {
         "@": "dist/src"
     },
+    "engines": {
+        "node": "22.x"
+    },
     "scripts": {
         "build": "tsc",
         "lint": "eslint . --ext .ts",
