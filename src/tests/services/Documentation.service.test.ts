@@ -1,7 +1,7 @@
 import * as PrismaClient from '../../utils/Prisma';
 import { DocumentationService } from '../../services/Documentation.service';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
-import { Prisma } from '@prisma/client';
+import { documentation } from '@prisma/client';
 
 describe('DocumentationService', () => {
     beforeEach(() => {
@@ -60,9 +60,35 @@ describe('DocumentationService', () => {
     describe('getAllKeywordsFromDocumentation', () => {
         it('should return keywords from docs', async () => {
             vi.spyOn(PrismaClient.prisma.documentation, 'findMany').mockResolvedValue([
-                { keywords: ['keyword1', 'keyword2'] },
-                { keywords: ['keyword3'] },
-            ] as Prisma.DocumentationGetPayload<{ select: { keywords: true } }>[]);
+                {
+                    id: 1,
+                    name: 'Doc A',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                    description: null,
+                    creator: null,
+                    filepath: 'fake.pdf',
+                    version: null,
+                    keywords: ['keyword1', 'keyword2'],
+                    picturepath: null,
+                    is_active: true,
+                    is_public: true,
+                },
+                {
+                    id: 2,
+                    name: 'Doc B',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                    description: null,
+                    creator: null,
+                    filepath: 'fake2.pdf',
+                    version: null,
+                    keywords: ['keyword3'],
+                    picturepath: null,
+                    is_active: true,
+                    is_public: true,
+                },
+            ] as documentation[]);
 
             const data = await DocumentationService.getAllKeywordsFromDocumentation();
             expect(data).toEqual(['keyword1', 'keyword2', 'keyword3']);
